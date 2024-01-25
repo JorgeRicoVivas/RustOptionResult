@@ -8,7 +8,7 @@ import java.util.function.Supplier;
 /**
  * Represents an optional value using two states: Some if containing a value, or None if there is no value.
  * <br><br>
- * This is a port and Java adaptation of the Rust's <a href="https://doc.rust-lang.org/stable/std/option/index.html">org.jorge_rico_vivas.rust.Option Type</a>.
+ * This is a port and Java adaptation of the Rust's <a href="https://doc.rust-lang.org/stable/std/option/index.html">Option Type</a>.
  *
  * @param <T> Value type.
  * @author Jorge Rico Vivas
@@ -18,7 +18,7 @@ public class Option<T> {
     private T value;
 
     /**
-     * Generates an org.jorge_rico_vivas.rust.Option as Some(value).
+     * Generates an Option as Some(value).
      *
      * @param value value contained on Some(value).
      */
@@ -27,21 +27,21 @@ public class Option<T> {
     }
 
     /**
-     * Generates an org.jorge_rico_vivas.rust.Option as Some(value).
+     * Generates an Option as Some(value).
      *
      * @param value value contained on Some(value).
      * @param <T>   Value type.
-     * @return org.jorge_rico_vivas.rust.Option as Some(value).
+     * @return Option as Some(value).
      */
     public static <T> Option<T> some(T value) {
         return new Option<>(value);
     }
 
     /**
-     * Generates an org.jorge_rico_vivas.rust.Option as None.
+     * Generates an Option as None.
      *
      * @param <T> Value type.
-     * @return org.jorge_rico_vivas.rust.Option as None.
+     * @return Option as None.
      */
     public static <T> Option<T> empty() {
         return new Option<>(null);
@@ -76,11 +76,11 @@ public class Option<T> {
     }
 
     /**
-     * Maps an org.jorge_rico_vivas.rust.Option&lt;T&gt; to org.jorge_rico_vivas.rust.Option&lt;U&gt; by applying a function to a contained value (if Some) or returns None (if None).
+     * Maps an Option&lt;T&gt; to Option&lt;U&gt; by applying a function to a contained value (if Some) or returns None (if None).
      *
      * @param mapper Maps the original value to another value.
      * @param <U>    Type T transforms to.
-     * @return org.jorge_rico_vivas.rust.Option&lt;T&gt; transformed to org.jorge_rico_vivas.rust.Option&lt;U&gt;, where T transformed into U using mapper.
+     * @return Option&lt;T&gt; transformed to Option&lt;U&gt;, where T transformed into U using mapper.
      */
     public <U> Option<U> map(Function<T, U> mapper) {
         return value != null ? Option.some(mapper.apply(value)) : Option.empty();
@@ -92,10 +92,10 @@ public class Option<T> {
      * Arguments passed to mapOr are eagerly evaluated; if you are passing the result of a function call, it is
      * recommended to use mapOrElse, which is lazily evaluated.
      *
-     * @param defaultValue a provided default which will be returned if this org.jorge_rico_vivas.rust.Option is None.
+     * @param defaultValue a provided default which will be returned if this Option is None.
      * @param mapper       Maps the original value to another value as a return result.
      * @param <U>          Type T transforms to as a return result.
-     * @return Value of the transformation from T to U if org.jorge_rico_vivas.rust.Option is Some(value), otherwise, it returns the default
+     * @return Value of the transformation from T to U if Option is Some(value), otherwise, it returns the default
      * value.
      */
     public <U> U mapOr(U defaultValue, Function<T, U> mapper) {
@@ -105,10 +105,10 @@ public class Option<T> {
     /**
      * Computes a default function result (if none), or applies a different function to the contained value (if any).
      *
-     * @param defaultValue a provided supplier which results in default value which will be calculated and returned if this org.jorge_rico_vivas.rust.Option is None.
+     * @param defaultValue a provided supplier which results in default value which will be calculated and returned if this Option is None.
      * @param mapper       Maps the original value to another value as a return result.
      * @param <U>          Type T transforms to as a return result.
-     * @return Value of the transformation from T to U if org.jorge_rico_vivas.rust.Option is Some(value), otherwise, it calculates and returns
+     * @return Value of the transformation from T to U if Option is Some(value), otherwise, it calculates and returns
      * the default value from the supplier.
      */
     public <U> U mapOrElse(Supplier<U> defaultValue, Function<T, U> mapper) {
@@ -116,27 +116,27 @@ public class Option<T> {
     }
 
     /**
-     * Transforms the org.jorge_rico_vivas.rust.Option&lt;T&gt; into a org.jorge_rico_vivas.rust.Result&lt;T, E&gt;, mapping Some(v) to Ok(v) and None to Err(err).
+     * Transforms the Option&lt;T&gt; into a Result&lt;T, E&gt;, mapping Some(v) to Ok(v) and None to Err(err).
      * <p>
      * Arguments passed to okOr are eagerly evaluated; if you are passing the result of a function call, it is
      * recommended to use okOrElse, which is lazily evaluated.
      *
-     * @param error error to transform into org.jorge_rico_vivas.rust.Result.Error if this org.jorge_rico_vivas.rust.Option is None
+     * @param error error to transform into Result.Error if this Option is None
      * @param <E>   Error type parameter.
-     * @return org.jorge_rico_vivas.rust.Result.Ok(value) if this option is Some(value), otherwise it returns org.jorge_rico_vivas.rust.Result.Error(error), where error is a parameter.
+     * @return Result.Ok(value) if this option is Some(value), otherwise it returns Result.Error(error), where error is a parameter.
      */
     public <E> Result<T, E> okOr(E error) {
         return value != null ? Result.ok(value) : Result.err(error);
     }
 
     /**
-     * Transforms the org.jorge_rico_vivas.rust.Option&lt;T&gt; into a org.jorge_rico_vivas.rust.Result&lt;T, E&gt;, mapping Some(v) to Ok(v) and None to Err(err()).
+     * Transforms the Option&lt;T&gt; into a Result&lt;T, E&gt;, mapping Some(v) to Ok(v) and None to Err(err()).
      *
-     * @param error error to transform into org.jorge_rico_vivas.rust.Result.Error if this org.jorge_rico_vivas.rust.Option is None, this is a {@link Supplier}, meaning it
-     *              is only calculated if this org.jorge_rico_vivas.rust.Option is None.
+     * @param error error to transform into Result.Error if this Option is None, this is a {@link Supplier}, meaning it
+     *              is only calculated if this Option is None.
      * @param <E>   Error type parameter.
-     * @return org.jorge_rico_vivas.rust.Result.Ok(value) if this option is Some(value), otherwise it returns org.jorge_rico_vivas.rust.Result.Error(error), where error is
-     * a parameter whose value gets calculated (Only if org.jorge_rico_vivas.rust.Option is None).
+     * @return Result.Ok(value) if this option is Some(value), otherwise it returns Result.Error(error), where error is
+     * a parameter whose value gets calculated (Only if Option is None).
      */
     public <E> Result<T, E> okOrElse(Supplier<E> error) {
         return value != null ? Result.ok(value) : Result.err(error.get());
@@ -166,7 +166,7 @@ public class Option<T> {
         if (value != null) {
             return value;
         } else {
-            throw new RuntimeException("called `org.jorge_rico_vivas.rust.Option::unwrap()` on a `None` value");
+            throw new RuntimeException("called `Option::unwrap()` on a `None` value");
         }
     }
 
@@ -184,7 +184,7 @@ public class Option<T> {
         if (value != null) {
             return value;
         } else {
-            throw new RuntimeException(errorMessage + System.lineSeparator() + "called `org.jorge_rico_vivas.rust.Option::unwrap()` on a `None` value");
+            throw new RuntimeException(errorMessage + System.lineSeparator() + "called `Option::unwrap()` on a `None` value");
         }
     }
 
@@ -194,7 +194,7 @@ public class Option<T> {
      * Arguments passed to unwrapOr are eagerly evaluated; if you are passing the result of a function call, it is
      * recommended to use unwrapOrElse, which is lazily evaluated.
      *
-     * @param defaultValue a provided default which will be returned if this org.jorge_rico_vivas.rust.Option is None.
+     * @param defaultValue a provided default which will be returned if this Option is None.
      * @return the contained Some value or a provided default.
      */
     public T unwrapOr(T defaultValue) {
@@ -204,9 +204,9 @@ public class Option<T> {
     /**
      * Returns the contained Some value or computes it from a {@link Supplier}.
      *
-     * @param defaultValue a provided default value getter whose value will be calculated and returned if this org.jorge_rico_vivas.rust.Option is
+     * @param defaultValue a provided default value getter whose value will be calculated and returned if this Option is
      *                     None.
-     * @return contained value if org.jorge_rico_vivas.rust.Option is Some(value), otherwise, calculates and returns the default value from the
+     * @return contained value if Option is Some(value), otherwise, calculates and returns the default value from the
      * supplier.
      */
     public T unwrapOrElse(Supplier<T> defaultValue) {
@@ -219,7 +219,7 @@ public class Option<T> {
      * - Some(T) if predicate returns true (where T is the wrapped value).
      * - None if predicate returns false.
      * <p>
-     * This function works similar to Rust's Iterator::filter(). You can imagine the org.jorge_rico_vivas.rust.Option&lt;T&gt; being an iterator over
+     * This function works similar to Rust's Iterator::filter(). You can imagine the Option&lt;T&gt; being an iterator over
      * one or zero elements. filter() lets you decide which elements to keep.
      *
      * @param predicate Condition this Some(value) has to match in order to return itself
@@ -235,9 +235,9 @@ public class Option<T> {
      * Arguments passed to and are eagerly evaluated; if you are passing the result of a function call, it is
      * recommended to use and_then, which is lazily evaluated.
      *
-     * @param res The other org.jorge_rico_vivas.rust.Option whose contents are returned if this org.jorge_rico_vivas.rust.Option is Some.
-     * @param <U> Value type of the latter org.jorge_rico_vivas.rust.Option.
-     * @return res if the org.jorge_rico_vivas.rust.Option is Some, otherwise None.
+     * @param res The other Option whose contents are returned if this Option is Some.
+     * @param <U> Value type of the latter Option.
+     * @return res if the Option is Some, otherwise None.
      */
     public <U> Option<U> and(Option<U> res) {
         return value != null ? res : Option.empty();
@@ -248,9 +248,9 @@ public class Option<T> {
      * <p>
      * Some languages call this operation flatmap.
      *
-     * @param res Generates an org.jorge_rico_vivas.rust.Option&lt;U&gt; from the T value.
-     * @param <U> Value type of the produced org.jorge_rico_vivas.rust.Option if this org.jorge_rico_vivas.rust.Option is Some.
-     * @return org.jorge_rico_vivas.rust.Result with mapped value if org.jorge_rico_vivas.rust.Option was Some, otherwise None.
+     * @param res Generates an Option&lt;U&gt; from the T value.
+     * @param <U> Value type of the produced Option if this Option is Some.
+     * @return Result with mapped value if Option was Some, otherwise None.
      */
     public <U> Option<U> andThen(Function<T, Option<U>> res) {
         return value != null ? res.apply(value) : Option.empty();
@@ -262,7 +262,7 @@ public class Option<T> {
      * Arguments passed to or are eagerly evaluated; if you are passing the result of a function call, it is recommended
      * to use orElse, which is lazily evaluated.
      *
-     * @param res The other org.jorge_rico_vivas.rust.Option whose contents are returned if this org.jorge_rico_vivas.rust.Option is None.
+     * @param res The other Option whose contents are returned if this Option is None.
      * @return This option if it contains a value, otherwise returns res.
      */
     public Option<T> or(Option<T> res) {
@@ -272,7 +272,7 @@ public class Option<T> {
     /**
      * Returns the option if it contains a value, otherwise calls the {@link Supplier} and returns the result.
      *
-     * @param res Supplier resolving in another org.jorge_rico_vivas.rust.Option whose contents are returned if this org.jorge_rico_vivas.rust.Option is None.
+     * @param res Supplier resolving in another Option whose contents are returned if this Option is None.
      * @return this option if it contains a value, otherwise calls {@link Supplier} and returns the result.
      */
     public Option<T> orElse(Supplier<Option<T>> res) {
@@ -282,7 +282,7 @@ public class Option<T> {
     /**
      * Returns Some if exactly one of self, res is Some, otherwise returns None.
      *
-     * @param res The other org.jorge_rico_vivas.rust.Option whose contents are returned if this org.jorge_rico_vivas.rust.Option is None and res is Some.
+     * @param res The other Option whose contents are returned if this Option is None and res is Some.
      * @return Some if exactly one of self, res is Some, otherwise returns None.
      */
     public Option<T> xor(Option<T> res) {
@@ -311,10 +311,10 @@ public class Option<T> {
     /**
      * Inserts value into the option if it is None, then returns a reference to the contained value.
      * <p>
-     * See also org.jorge_rico_vivas.rust.Option::insert, which updates the value even if the option already contains Some.
+     * See also Option::insert, which updates the value even if the option already contains Some.
      *
-     * @param value The new value (if this org.jorge_rico_vivas.rust.Option is None).
-     * @return The new value if this org.jorge_rico_vivas.rust.Option is None, otherwise, the old value.
+     * @param value The new value (if this Option is None).
+     * @return The new value if this Option is None, otherwise, the old value.
      */
     public T getOrInsert(T value) {
         if (this.value == null) {
@@ -327,8 +327,8 @@ public class Option<T> {
      * Inserts a value computed from the {@link Supplier} into the option if it is None, then returns a reference to the
      * contained value.
      *
-     * @param value Supplier giving the new value (if this org.jorge_rico_vivas.rust.Option is None).
-     * @return The new value if this org.jorge_rico_vivas.rust.Option is None, otherwise, the old value.
+     * @param value Supplier giving the new value (if this Option is None).
+     * @return The new value if this Option is None, otherwise, the old value.
      */
     public T getOrInsertWith(Supplier<T> value) {
         if (this.value == null) {
