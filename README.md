@@ -8,39 +8,39 @@ Represents an optional value using two states: Some if containing a value, or No
 
 | **Constructor/Method** | **Description** |
 | --- | --- |
-| **Option(value)** | _Generates an Option as Some(value)._ |
-| **some(value)** | _Generates an Option as Some(value)._ |
-| **empty()** | _Generates an Option as None._ |
+| **Option(value)** | Generates an Option as Some(value). |
+| _**some(value)**_ | Generates an Option as Some(value). |
+| _**empty()**_ | Generates an Option as None. |
 
 This class implements:
 
-| **Operation**                      | **Result** | **_Description_** |
+| **Operation**                      | **Result** | **Description** |
 |------------------------------------| --- | --- |
-| **isSome()**                       | boolean | _Returns true if the option is a Some value._ |
-| **isSomeAnd(predicate)**           | boolean | _Returns true if the option is a Some and the value inside of it matches a predicate._ |
-| **isNone()**                       | boolean | _Returns true if the option is a None value._ |
-| **map(mapper)**                    | Option\<U\> | _Maps an Option\<T\> to Option\<U\> by applying a function to a contained value (if Some) or returns None (if None)._ |
-| **mapOr(defaultValue,mapper)**     | U | _Returns the provided default result (if none), or applies a function to the contained value (if any)._ |
-| **mapOrElse(defaultValue,mapper)** | U | _Computes a default function result (if none), or applies a different function to the contained value (if any)._ |
-| **okOr(error)**                    | Result\<T, E\> | _Transforms the Option\<T\> into a Result\<T, E\>, mapping Some(v) to Ok(v) and None to Err(err)._ |
-| **okOrElse(error)**                | Result\<T, E\> | _Transforms the Option\<T\> into a Result\<T, E\>, mapping Some(v) to Ok(v) and None to Err(err)._ |
-| **inspect(inspector)**             | | _Calls the provided inspector on the contained value (if Some)._ |
-| **unwrap()**                       | T | _Returns the contained Some value._ |
-| **expect(errorMessage)**           | T | _Returns the contained Some value._ |
-| **unwrapOr(defaultValue)**         | T | _Returns the contained Some value or a provided default._ |
-| **unwrapOrElse(defaultValue)**     | T | _Returns the contained Some value or computes it from the parameter._ |
-| **filter(predicate)**              | Option\<T\> | _Returns None if the option is None, otherwise calls predicate with the wrapped value and returns: <br> - Some(T) if predicate returns true (where T is the wrapped value). <br> - None if predicate returns false._ |
-| **and(res)**                       | Option\<T\> | _Returns None if the option is None, otherwise returns res._ |
-| **andThen(res)**                   | Option\<T\> | _Returns None if the option is None, otherwise calls the parameter with the wrapped value and returns the result._ |
-| **or(res)**                        | Option\<T\> | _Returns the option if it contains a value, otherwise returns res._ |
-| **orElse(res)**                    | Option\<T\> | _Returns the option if it contains a value, otherwise calls the parameter and returns its result._ |
-| **xor(res)**                       | Option\<T\> | _Returns Some if exactly one of self, res is Some, otherwise returns None._ |
-| **insert(value)**                  | T | _Inserts value into the option, then returns a reference to it._ |
-| **getOrInsert(value)**             | T | _Inserts value into the option if it is None, then returns a reference to the contained value._ |
-| **getOrInsertWith(value)**         | T | _Inserts a value computed from parameter function into the option if it is None, then returns a reference to the contained value._ |
-| **take()**                         | T | _Takes the value out of the option, leaving a None in its place._ |
-| **takeIf(predicate)**              | T | _Takes the value out of the option, but only if the predicate evaluates to true on the value. <br> In other words, replaces self with None if the predicate returns true, this method operates similar to take(), but conditional._ |
-| **replace(T value)**               | Option\<T\> | _Replaces the actual value in the option by the value given in parameter, returning the old value if present, leaving a Some in its place without de-initializing either one._ |
+| **isSome()**                       | boolean | Returns true if the option is a Some value. |
+| **isSomeAnd(predicate)**           | boolean | Returns true if the option is a Some and the value inside of it matches a predicate. |
+| **isNone()**                       | boolean | Returns true if the option is a None value. |
+| **map(mapper)**                    | Option\<U\> | Maps an Option\<T\> to Option\<U\> by applying a function to a contained value (if Some) or returns None (if None). |
+| **mapOr(defaultValue,mapper)**     | U | Returns the provided default result (if none), or applies a function to the contained value (if any). |
+| **mapOrElse(defaultValue,mapper)** | U | Computes a default function result (if none), or applies a different function to the contained value (if any). |
+| **okOr(error)**                    | Result\<T, E\> | Transforms the Option\<T\> into a Result\<T, E\>, mapping Some(v) to Ok(v) and None to Err(err). |
+| **okOrElse(error)**                | Result\<T, E\> | Transforms the Option\<T\> into a Result\<T, E\>, mapping Some(v) to Ok(v) and None to Err(err). |
+| **inspect(inspector)**             | | Calls the provided inspector on the contained value (if Some). |
+| **unwrap()**                       | T | Returns the contained Some value. |
+| **expect(errorMessage)**           | T | Returns the contained Some value. |
+| **unwrapOr(defaultValue)**         | T | Returns the contained Some value or a provided default. |
+| **unwrapOrElse(defaultValue)**     | T | Returns the contained Some value or computes it from the parameter. |
+| **filter(predicate)**              | Option\<T\> | Returns None if the option is None, otherwise calls predicate with the wrapped value and returns: <br> - Some(T) if predicate returns true (where T is the wrapped value). <br> - None if predicate returns false. |
+| **and(res)**                       | Option\<T\> | Returns None if the option is None, otherwise returns res. |
+| **andThen(res)**                   | Option\<T\> | Returns None if the option is None, otherwise calls the parameter with the wrapped value and returns the result. |
+| **or(res)**                        | Option\<T\> | Returns the option if it contains a value, otherwise returns res. |
+| **orElse(res)**                    | Option\<T\> | Returns the option if it contains a value, otherwise calls the parameter and returns its result. |
+| **xor(res)**                       | Option\<T\> | Returns Some if exactly one of self, res is Some, otherwise returns None. |
+| **insert(value)**                  | T | Inserts value into the option, then returns a reference to it. |
+| **getOrInsert(value)**             | T | Inserts value into the option if it is None, then returns a reference to the contained value. |
+| **getOrInsertWith(value)**         | T | Inserts a value computed from parameter function into the option if it is None, then returns a reference to the contained value. |
+| **take()**                         | T | Takes the value out of the option, leaving a None in its place. |
+| **takeIf(predicate)**              | T | Takes the value out of the option, but only if the predicate evaluates to true on the value. <br> In other words, replaces self with None if the predicate returns true, this method operates similar to take(), but conditional. |
+| **replace(T value)**               | Option\<T\> | Replaces the actual value in the option by the value given in parameter, returning the old value if present, leaving a Some in its place without de-initializing either one. |
 
 ### Example:
 
@@ -67,36 +67,36 @@ You can generate one through:
 
 | **Constructor/Method** | **Description** |
 | --- | --- |
-| **from(Callable\<T\> valueGetter)** | _Generates a Result\<T,Exception\> which will be Ok(Value) if valueGetter gives a value, or Err(Exception) if an exception is thrown while trying to get said value._ |
-| **ok(value)** | _Generates a Result as Ok(value)._ |
-| **err(error)** | _Generates a Result as Err(error)._ |
+| _**from(Callable\<T\> valueGetter)**_ | Generates a Result\<T,Exception\> which will be Ok(Value) if valueGetter gives a value, or Err(Exception) if an exception is thrown while trying to get said value. |
+| _**ok(value)**_ | Generates a Result as Ok(value). |
+| _**err(error)**_ | Generates a Result as Err(error). |
 
 This class implements:
 
-| Operation | Result         | _Description_                                                                                                                                            |
+| **Operation** | **Result**         | **Description**                                                                                                                                            |
 | --- |----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| isOk() | boolean        | _Returns true if the result is Ok._                                                                                                                      |
-| isOkAnd(predicate) | boolean        | _Returns true if the result is Ok and the value inside of it matches a predicate._                                                                       |
-| isErr() | boolean        | _Returns true if the result is Err._                                                                                                                     |
-| isErrAnd(predicate) | boolean        | _Returns true if the result is Err and the value inside of it matches a predicate._                                                                      |
-| ok() | Option\<T\>    | _Converts from Result\<T, E\> to Option\<T\>._                                                                                                           |
-| err() | Option\<E\>    | _Converts from Result\<T, E\> to Option\<E\>._                                                                                                           |
-| map(mapper) | Result\<U, E\> | _Maps a Result\<T, E\> to Result\<U, E\> by applying a function to a contained Ok value, leaving an Err value untouched._                                |
-| mapOr(defaultValue, mapper) | U              | _Returns the provided default (if Err), or applies a function to the contained value (if Ok)._                                                           |
-| mapOrElse(defaultValue, mapper) | U              | _Maps a Result&lt;T, E&gt; to U by applying fallback function default to a contained Err value, or function defaultValueGetter to a contained Ok value._ |
-| mapError(errorMapper) | Result\<T, O\> | _Maps a Result&lt;T, E&gt; to Result&lt;T, F&gt; by applying a function to a contained Err value, leaving an Ok value untouched._                        |
-| inspect(inspector) |                |  _Calls the provided functionon the contained value (if Ok)._            |
-| inspectErr(inspector) |                | _Calls the provided consumer function on the contained error (if Err)._ |
-| unwrap() | T              | _Returns the contained Ok value._                                                                                                                        |
-| expect(errorMessage) | T              | _Returns the contained Ok value._                                                                                                                        |
-| unwrapOr(defaultValue) | T              | _Returns the contained Ok value or a provided default._                                                                                                  |
-| unwrapOrElse(defaultValue) | T              | _Returns the contained Ok value or computes it from the parameter function._                                                                             |
-| unwrapErr() | E              | _Returns the contained Err value._                                                                                                                       |
-| expectErr(errorMessage) | E              | _Returns the contained Err value._                                                                                                                       |
-| and(res) | Result\<U, E\> | _Returns res if the result is Ok, otherwise returns the Err value of this Result._                                                                       |
-| andThen(res) | Result\<U, E\> | _Returns the resulting of calling op over the value if Ok, otherwise returns the Err value of this Result._                                              |
-| or(res) | Result\<T, O\> | _Returns res if the result is Err, otherwise returns the Ok value of this Result._                                                                       |
-| orElse(res) | Result\<T, O\> | _Returns the resulting of calling op over the value if Err, otherwise returns the Ok value of self._                                                     |
+| **isOk()** | boolean        | Returns true if the result is Ok.                                                                                                                      |
+| **isOkAnd(predicate)** | boolean        | Returns true if the result is Ok and the value inside of it matches a predicate.                                                                       |
+| **isErr()** | boolean        | Returns true if the result is Err.                                                                                                                     |
+| **isErrAnd(predicate)** | boolean        | Returns true if the result is Err and the value inside of it matches a predicate.                                                                      |
+| **ok()** | Option\<T\>    | Converts from Result\<T, E\> to Option\<T\>.                                                                                                           |
+| **err()** | Option\<E\>    | Converts from Result\<T, E\> to Option\<E\>.                                                                                                           |
+| **map(mapper)** | Result\<U, E\> | Maps a Result\<T, E\> to Result\<U, E\> by applying a function to a contained Ok value, leaving an Err value untouched.                                |
+| **mapOr(defaultValue, mapper)** | U              | Returns the provided default (if Err), or applies a function to the contained value (if Ok).                                                           |
+| **mapOrElse(defaultValue, mapper)** | U              | Maps a Result&lt;T, E&gt; to U by applying fallback function default to a contained Err value, or function defaultValueGetter to a contained Ok value. |
+| **mapError(errorMapper)** | Result\<T, O\> | Maps a Result&lt;T, E&gt; to Result&lt;T, F&gt; by applying a function to a contained Err value, leaving an Ok value untouched.                        |
+| **inspect(inspector)** |                |  Calls the provided functionon the contained value (if Ok).            |
+| **inspectErr(inspector)** |                | Calls the provided consumer function on the contained error (if Err). |
+| **unwrap()** | T              | Returns the contained Ok value.                                                                                                                        |
+| **expect(errorMessage)** | T              | Returns the contained Ok value.                                                                                                                        |
+| **unwrapOr(defaultValue)** | T              | Returns the contained Ok value or a provided default.                                                                                                  |
+| **unwrapOrElse(defaultValue)** | T              | Returns the contained Ok value or computes it from the parameter function.                                                                             |
+| **unwrapErr()** | E              | Returns the contained Err value.                                                                                                                       |
+| **expectErr(errorMessage)** | E              | Returns the contained Err value.                                                                                                                       |
+| **and(res)** | Result\<U, E\> | Returns res if the result is Ok, otherwise returns the Err value of this Result.                                                                       |
+| **andThen(res)** | Result\<U, E\> | Returns the resulting of calling op over the value if Ok, otherwise returns the Err value of this Result.                                              |
+| **or(res)** | Result\<T, O\> | Returns res if the result is Err, otherwise returns the Ok value of this Result.                                                                       |
+| **orElse(res)** | Result\<T, O\> | Returns the resulting of calling op over the value if Err, otherwise returns the Ok value of self.                                                     |
 
 ### Example:
 
